@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-interface Game {
+export interface Game {
   id: number;
   name: number;
+  background_image: string;
 }
 
 interface FetchGameResponse {
@@ -18,6 +19,11 @@ export const useGames = () => {
       .get<FetchGameResponse>("/games")
       .then((res) => setGames(res.data.results))
       .catch((err) => setError(err.message));
+
+
+
+
   });
   return { games, error };
 };
+
