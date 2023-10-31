@@ -4,8 +4,13 @@ export interface Game {
   id: number;
   name: number;
   background_image: string;
+  parent_platforms:{platform: Platform}[]
 }
-
+export interface Platform{
+  id: number,
+  name: string,
+  slug:string
+}
 interface FetchGameResponse {
   count: number;
   results: Game[];
@@ -15,15 +20,13 @@ export const useGames = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const controllers = new AbortController();
     apiClient
       .get<FetchGameResponse>("/games")
       .then((res) => setGames(res.data.results))
       .catch((err) => setError(err.message));
 
-
-
-
-  });
+      return ()=>controllers.abort();
+  },[]);
   return { games, error };
 };
-
