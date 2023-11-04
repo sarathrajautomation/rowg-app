@@ -11,8 +11,8 @@ interface props {
 
 const GameCard = ({ game }: props) => {
   return (
-    <Card>
-      <Image src={url(game.background_image)} />
+    <Card width='300px'>
+      <Image src={game.background_image} />
 
       <CardBody>
         <Heading>{game.name}</Heading>

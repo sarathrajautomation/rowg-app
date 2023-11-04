@@ -20,14 +20,29 @@ export const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
 
+
+  const [isLoading, SetLoading]=useState(false);
+
   useEffect(() => {
     const controllers = new AbortController();
+    SetLoading(true)
     apiClient
       .get<FetchGameResponse>("/games")
-      .then((res) => setGames(res.data.results))
+      .then((res) => 
+      
+      {
+         setGames(res.data.results)
+         SetLoading(false)
+      
+      }
+      
+     
+      
+      )
       .catch((err) => setError(err.message));
+      SetLoading(false)
 
       return ()=>controllers.abort();
   },[]);
-  return { games, error };
+  return { games, error, isLoading };
 };
