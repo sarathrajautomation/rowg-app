@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
+import { useData } from "./useData";
 export interface Game {
   id: number;
   name: number;
@@ -12,37 +13,5 @@ export interface Platform{
   name: string,
   slug:string
 }
-interface FetchGameResponse {
-  count: number;
-  results: Game[];
-}
-export const useGames = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
 
-
-  const [isLoading, SetLoading]=useState(false);
-
-  useEffect(() => {
-    const controllers = new AbortController();
-    SetLoading(true)
-    apiClient
-      .get<FetchGameResponse>("/games")
-      .then((res) => 
-      
-      {
-         setGames(res.data.results)
-         SetLoading(false)
-      
-      }
-      
-     
-      
-      )
-      .catch((err) => setError(err.message));
-      SetLoading(false)
-
-      return ()=>controllers.abort();
-  },[]);
-  return { games, error, isLoading };
-};
+export  const useGames = () => useData<Game>("/games")

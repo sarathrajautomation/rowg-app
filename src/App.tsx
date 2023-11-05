@@ -8,6 +8,7 @@ function App() {
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
+      
         lg: `"nav nav" "aside main"`,
       }}
     >
@@ -15,8 +16,8 @@ function App() {
         <NavBar />
       </GridItem>
 
-      <Show above="lg">
-        <GridItem area="aside" >
+      <Show above="lg" >
+        <GridItem area="aside" padding={3} >
        <GenreList/>
         </GridItem>
       </Show>
