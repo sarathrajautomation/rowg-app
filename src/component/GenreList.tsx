@@ -1,11 +1,14 @@
 import React from "react";
 import { Genre, useGenre } from "../hooks/useGenre";
 import { useData } from "../hooks/useData";
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
+import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
 
 const GenreList = () => {
-  const { data } = useGenre();
+  const { data, isLoading } = useGenre();
+  if(isLoading) return <Spinner/>
   return (
+
+   
     <List>
       {data.map((genrs) => (
         <ListItem key={genrs.id} paddingY={1}>
