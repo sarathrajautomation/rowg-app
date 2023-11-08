@@ -15,16 +15,17 @@ export interface Platform {
   slug: string;
 }
 
-export const useGames = (selectedGenre: Genre | null, selectedPlatform:Platform|null, selectedRev: string|null) =>
+export const useGames = (selectedGenre: Genre | null, selectedPlatform:Platform|null, selectedRev: string|null, searchGames: string|null) =>
   useData<Game>("/games", {
     params: {
       genres: selectedGenre?.id, 
       platforms: selectedPlatform?.id,
       ordering:selectedRev,
+      search:searchGames
     },
 
   },
-  [selectedGenre?.id, selectedPlatform?.id, selectedRev]
+  [selectedGenre?.id, selectedPlatform?.id, selectedRev, searchGames]
   
  
   );

@@ -7,9 +7,10 @@ interface props {
   selectedGenre: Genre | null;
   selectedPlatform: Platform | null;
   selectedPopular: string;
+  searchGame: string;
 }
-const GameGrid = ({ selectedGenre, selectedPlatform , selectedPopular}: props) => {
-  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform, selectedPopular);
+const GameGrid = ({ selectedGenre, selectedPlatform , selectedPopular, searchGame}: props) => {
+  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform, selectedPopular, searchGame);
 
   if (isLoading)
     return (

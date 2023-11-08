@@ -20,7 +20,15 @@ function App() {
   const [selectedGenre, SetGenre] = useState<Genre | null>(null);
   const [selectedPlatform, SetPlatform] = useState<Platform | null>(null);
   const [SelectRev, SetSelectRev] = useState("");
+  const [ViewSearch, SetSearch] = useState("");
 
+
+
+  const gameQuery=[
+    {
+      selectedGenre, selectedPlatform, SelectRev, ViewSearch
+    }
+  ]
   return (
     <Grid
       templateAreas={{
@@ -30,7 +38,7 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar search={(value) => SetSearch(value)} />
       </GridItem>
 
       <Show above="lg">
@@ -48,11 +56,12 @@ function App() {
             displayPlatform={selectedPlatform}
             selectedPlatform={(plat) => SetPlatform(plat)}
           />
-          <SortSelector onSelectSortOrder={(ls)=>SetSelectRev(ls)} />
+          <SortSelector onSelectSortOrder={(ls) => SetSelectRev(ls)} />
         </HStack>
         <GameGrid
           selectedPopular={SelectRev}
           selectedPlatform={selectedPlatform}
+          searchGame={ViewSearch}
           selectedGenre={selectedGenre}
         />
       </GridItem>
